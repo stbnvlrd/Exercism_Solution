@@ -10,7 +10,7 @@ CREATE OR REPLACE PACKAGE BODY hello_world# IS
       RETURN varchar2
    AS
    BEGIN
-      RETURN 'Goodbye, Mars!';
+      RETURN 'Hello, World!';
    END hello;
 END hello_world#;
 /
