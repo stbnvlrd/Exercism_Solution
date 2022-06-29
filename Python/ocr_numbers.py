@@ -6,8 +6,25 @@ def convert(input_grid):
             if len(row) % 3 != 0:
                 raise ValueError("Number of input columns is not a multiple of three")
         
-        
-            number = input_grid
+        column_division = (len(input_grid[0])//3)
+        # letter_list_model = ["","","",""]
+        numbers = [[] for i in range(column_division)]
+        print(numbers)
+                
+        # numbers = [[""] * 4] * column_division
+        # print(numbers)
+        for row in range(len(input_grid)):
+            for column in range(len(input_grid[row])):
+                # print(str(row) + ", " + str(column//3))
+                # print(input_grid[row][column])
+                if column % 3 == 0:
+                    numbers[column//3].append(input_grid[row][column])
+                else:
+                    numbers[column//3][row] = numbers[column//3][row] + input_grid[row][column]
+            # print(numbers)
+        # print(numbers)
+        result = ""
+        for number in numbers:
             if number == [" _ ", "| |", "|_|", "   "]:
                 decimal_number = "0"
             elif number == ["   ", "  |", "  |", "   "]:
@@ -30,6 +47,7 @@ def convert(input_grid):
                 decimal_number = "9"
             else:
                 decimal_number = "?"
-    return decimal_number
+            result = result + decimal_number
+    return result
     
 print(convert(["    _  _     _  _  _  _  _  _ ", "  | _| _||_||_ |_   ||_||_|| |", "  ||_  _|  | _||_|  ||_| _||_|", "                              ",]))
