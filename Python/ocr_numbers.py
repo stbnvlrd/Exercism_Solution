@@ -8,19 +8,23 @@ def convert(input_grid):
         
         column_division = (len(input_grid[0])//3)
         # letter_list_model = ["","","",""]
+        
+        if len(input_grid) > 4:
+            input_lines = ['','','','']
+            for row in range(len(input_grid)):
+                input_lines[row%4] = input_lines[row%4] + input_grid[row]
+        else:
+            input_lines = input_grid
         numbers = [[] for i in range(column_division)]
         print(numbers)
-                
-        # numbers = [[""] * 4] * column_division
-        # print(numbers)
-        for row in range(len(input_grid)):
-            for column in range(len(input_grid[row])):
+        for row in range(len(input_lines)):
+            for column in range(len(input_lines[row])):
                 # print(str(row) + ", " + str(column//3))
-                # print(input_grid[row][column])
+                # print(input_lines[row][column])
                 if column % 3 == 0:
-                    numbers[column//3].append(input_grid[row][column])
+                    numbers[column//3].append(input_lines[row][column])
                 else:
-                    numbers[column//3][row] = numbers[column//3][row] + input_grid[row][column]
+                    numbers[column//3][row] = numbers[column//3][row] + input_lines[row][column]
             # print(numbers)
         # print(numbers)
         result = ""
@@ -49,5 +53,5 @@ def convert(input_grid):
                 decimal_number = "?"
             result = result + decimal_number
     return result
-    
+
 print(convert(["    _  _     _  _  _  _  _  _ ", "  | _| _||_||_ |_   ||_||_|| |", "  ||_  _|  | _||_|  ||_| _||_|", "                              ",]))
