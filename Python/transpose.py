@@ -1,14 +1,15 @@
 def transpose(lines):
-   
-    # lines = lines.split("\n")
-    for index in range(len(lines)):
-        while len(lines(index)) < len(lines(index + 1)):
-            new = lines(index) + " "
-            lines(index) = new
-    transposed = [""]*len(lines[0])
+    
+    lines = lines.split("\n")
+    max_len = len(max(lines, key=len))
+    transposed = [""]*max_len
     for y in range(len(lines)):
-    	for x in range(len(lines[y])):
-            transposed[x] = transposed[x] + lines[y][x]
+        new_line = lines[y]
+        if y + 2 <= len(lines):
+            while len(new_line) < len(max(lines[y+1:len(lines)], key=len)):
+                new_line = new_line + " "
+        for x in range(len(new_line)):
+                transposed[x] = transposed[x] + new_line[x]
             
     print(transposed)
     return "\n".join(transposed)
