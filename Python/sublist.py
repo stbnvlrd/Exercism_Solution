@@ -69,4 +69,7 @@ def sublist(list_one, list_two):
         result = contains(list_one, list_two)
     elif lenght_A > lenght_B:
         result = iscontained(list_one, list_two)
+    if result is None:
+        result = UNEQUAL
+
     return result
