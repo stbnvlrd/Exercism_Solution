@@ -28,13 +28,29 @@ def equal(list_one, list_two):
     else:   
         result = UNEQUAL
     return result
-    
+
+def contains(list_short, list_long):
+    count = 0
+    if list_short == []:
+        return SUBLIST
+    else:
+        for index in range(len(list_long)):
+            if list_short[0] == list_long[index]:
+                count = 0
+                for index_short in range(len(list_short)):
+                    print(index_short)
+                    if list_short[index_short] == list_long[index + index_short]:
+                        count = count + 1
+                if count == len(list_short):
+                    return SUBLIST
+
 def sublist(list_one, list_two):
     lenght_A = len(list_one)
     lenght_B = len(list_two)
     if lenght_A == lenght_B:
         result = equal(list_one, list_two)
-    # elif lenght_A < lenght_B:
+    elif lenght_A < lenght_B:
+        result = contains(list_one, list_two)
     # elif lenght_A > lenght_B:
 
     return result
