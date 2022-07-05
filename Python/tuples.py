@@ -25,13 +25,8 @@ def create_record(azara_record, rui_record):
 
 
 def clean_up(combined_record_group):
-    ordered_record_list = list()
-    for index in range(len(combined_record_group)):
-        ind_record = combined_record_group[index]
-        ordered_record = ind_record[0], ind_record[2], ind_record[3], ind_record[4]
-        ordered_record_list.append(ordered_record)
-    final_record = tuple(ordered_record_list)
-    return final_record
+    return "".join([f"{(record[0], record[2], record[3], record[4])}\n" for record in combined_record_group])
+
 
 
 print(clean_up((("Scrimshaw Whale's Tooth", '2A', 'Deserted Docks', ('2', 'A'), 'Blue'),
