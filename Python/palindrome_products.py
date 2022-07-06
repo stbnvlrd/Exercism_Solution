@@ -6,13 +6,16 @@ def smallest_product(min_factor, max_factor):
                 return mult
     
 def largest_product(min_factor, max_factor):
-    for a in range(max_factor + 1, min_factor, -1):
-        for b in range(max_factor + 1, min_factor, -1):
+    mult = None
+    for a in range(max_factor, min_factor - 1, -1):
+        print(a)
+        b_min_factor = int(2*(min_factor + max_factor)/3)
+        for b in range(max_factor, b_min_factor, -1):
             mult = a * b
             if str(mult) == str(mult)[::-1]:
+                print(mult)
                 return mult
-    if mult == 0:
-        return []
+    return mult
         
 def largest(min_factor, max_factor):
     if max_factor < min_factor:
@@ -51,6 +54,7 @@ def smallest(min_factor, max_factor):
                     products.append(values)
         print(products)
     return min_product, products
+        
 print(largest(1000, 9999))
 print(smallest(1000, 9999))
 
