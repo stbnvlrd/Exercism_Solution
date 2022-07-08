@@ -3,10 +3,30 @@ def answer(question):
     equation = equation.replace(" by ", " ")
     split_equation = equation.split()
     print(split_equation)
+
+###    Numbers    ###
+    
     if len(split_equation) == 1:
         return(int(split_equation[0]))
-    if len(split_equation) == 0:
-        raise ValueError("syntax error")
+        
+###    Single Operations    ###
+
+    elif len(split_equation) == 3:
+        if split_equation[1] == "plus":
+            return(int(split_equation[0]) + int(split_equation[2]))
+        elif split_equation[1] == "minus":
+            return(int(split_equation[0]) - int(split_equation[2]))
+        elif split_equation[1] == "multiplied":
+            return(int(split_equation[0]) * int(split_equation[2]))
+        elif split_equation[1] == "divided":
+            return(int(split_equation[0]) / int(split_equation[2]))
+        elif split_equation[0] == "plus" or split_equation[2] == "plus":
+            raise ValueError("syntax error")
+        else:
+            raise ValueError("unknown operation")
+
+###    Multiple Operations    ###
+        
     elif len(split_equation) == 5:
         if split_equation[1] == "plus":
             first_op = (int(split_equation[0]) + int(split_equation[2]))
@@ -28,18 +48,11 @@ def answer(question):
             return (first_op / int(split_equation[4]))
         else:
             raise ValueError("unknown operation")
-    elif len(split_equation) == 2:
+
+###    Errors    ###
+        
+    elif len(split_equation) == 0 or len(split_equation) == 2 or  len(split_equation) == 4:
         raise ValueError("syntax error")
-    elif len(split_equation) == 3:
-        if split_equation[1] == "plus":
-            return(int(split_equation[0]) + int(split_equation[2]))
-        elif split_equation[1] == "minus":
-            return(int(split_equation[0]) - int(split_equation[2]))
-        elif split_equation[1] == "multiplied":
-            return(int(split_equation[0]) * int(split_equation[2]))
-        elif split_equation[1] == "divided":
-            return(int(split_equation[0]) / int(split_equation[2]))
-        else:
-            raise ValueError("unknown operation")
+ 
     else:
         raise ValueError("unknown operation")
