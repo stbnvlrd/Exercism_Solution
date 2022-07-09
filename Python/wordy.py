@@ -50,7 +50,8 @@ def answer(question):
             raise ValueError("unknown operation")
 
 ###    Errors    ###
-        
+    elif len(split_equation) == 2 and split_equation[1].isalpha() and split_equation[1] != "plus":
+        raise ValueError("unknown operation")
     elif len(split_equation) == 0 or len(split_equation) == 2 or  len(split_equation) == 4:
         raise ValueError("syntax error")
  
