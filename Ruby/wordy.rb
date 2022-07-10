@@ -17,6 +17,18 @@ class WordProblem
     when "minus"
       result = @phrase[0].to_i - @phrase[2].to_i
     end
+    if @phrase.length == 5 then
+      case @phrase[3]
+      when "plus"
+        result = result + @phrase[4].to_i 
+      when "divided"
+        result = result / @phrase[4].to_i
+      when "multiplied"
+        result = result * @phrase[4].to_i
+      when "minus"
+        result = result - @phrase[4].to_i
+      end
+    end
     return result
   end
 end
