@@ -7,6 +7,12 @@ class WordProblem
   end
 
   def answer
+    if @phrase.length == 2 then
+      raise ArgumentError
+    end
+    if not Integer(@phrase[0]) then
+      raise ArgumentError
+    end
     case @phrase[1]
     when "plus"
       result = @phrase[0].to_i + @phrase[2].to_i 
