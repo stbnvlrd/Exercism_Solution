@@ -1,4 +1,7 @@
 class Game
+  class BowlingError < StandardError
+  end
+
   def initialize()
     @final_score = 0
     @last_roll = 0
@@ -8,6 +11,9 @@ class Game
   end
 
   def roll(pin)
+    raise BowlingError if pin < 0
+    raise BowlingError if pin > 10
+    
     @last_last_roll = @last_roll
     @last_roll = @roll
     @roll = pin
@@ -16,13 +22,16 @@ class Game
     else
       @roll_count += 1  
     end
+
+    # raise BowlingError if (@roll_count % 2 == 0 and (pin + @last_roll) > 10 and @last_roll != 10 and @last_last_roll != 10)
+      
     print "Turn "
     puts @roll_count
     if @roll_count <= 20 then
       @final_score = @final_score + pin
       puts @final_score
     end
-    if @roll_count % 2 != 0 and (@last_last_roll + @last_roll) == 10 and @last_roll != 10 and @last_roll != 0 then
+    if (@roll_count % 2 != 0 or (@roll_count % 2 == 0 and pin == 10)) and (@last_last_roll + @last_roll) == 10 and @last_roll != 10 and @last_roll != 0 then
       @final_score = @final_score + pin
       print "spare "
       puts @final_score
@@ -41,9 +50,12 @@ class Game
 
 
   def score
+    raise BowlingError if @roll_count == 0
     @final_score
   end
 end
+    
+    
   
   
   # puts "Game 1"    
