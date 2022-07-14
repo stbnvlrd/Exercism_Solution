@@ -1,3 +1,11 @@
+=begin
+Write your code for the 'Two Bucket' exercise in this file. Make the tests in
+`two_bucket_test.rb` pass.
+
+To get started with TDD, see the `README.md` file in your
+`ruby/two-bucket` directory.
+=end
+
 
 class TwoBucket
   def initialize(small_bucket, big_bucket, desired_volumen, full_bucket)
@@ -5,43 +13,52 @@ class TwoBucket
     @big_bucket = big_bucket
     @desired_volumen = desired_volumen
     @full_bucket = full_bucket
+    @goal_bucket = ""
   end
     
   def moves
     count = 0
     small_bucket_remaining = 0
     big_bucket_remaining = 0
+    
     if @full_bucket == "one" then
-      while small_bucket_remaining != @desired_volumen and count < 20 do
-        ### Fill Small Bucket
-        if small_bucket_remaining == 0 then
-          count += 1
-          small_bucket_remaining = @small_bucket
-
-        ### Empty Small Bucket in Big Bucket
-        elsif small_bucket_remaining > 0 and big_bucket_remaining < @big_bucket then
-          if small_bucket_remaining > (@big_bucket - big_bucket_remaining) then
-            small_bucket_remaining = small_bucket_remaining - (@big_bucket - big_bucket_remaining)
-            big_bucket_remaining = @big_bucket
-          else
-            big_bucket_remaining = small_bucket_remaining + big_bucket_remaining
-            small_bucket_remaining = 0
+      if @desired_volumen == @big_bucket then
+        @other_bucket = @small_bucket
+        @goal_bucket = "two"
+        count = 2
+      else
+        while small_bucket_remaining != @desired_volumen do
+          ### Fill Small Bucket
+          if small_bucket_remaining == 0 then
+            count += 1
+            small_bucket_remaining = @small_bucket
+  
+          ### Empty Small Bucket in Big Bucket
+          elsif small_bucket_remaining > 0 and big_bucket_remaining < @big_bucket then
+            if small_bucket_remaining > (@big_bucket - big_bucket_remaining) then
+              small_bucket_remaining = small_bucket_remaining - (@big_bucket - big_bucket_remaining)
+              big_bucket_remaining = @big_bucket
+            else
+              big_bucket_remaining = small_bucket_remaining + big_bucket_remaining
+              small_bucket_remaining = 0
+            end
+            count += 1
+  
+          ### Empty Small Bucket
+          elsif big_bucket_remaining == @big_bucket then
+            big_bucket_remaining = 0
+            count += 1
           end
-          count += 1
-
-        ### Empty Small Bucket
-        elsif big_bucket_remaining == @big_bucket then
-          big_bucket_remaining = 0
-          count += 1
+  
+          # puts count
+          # puts small_bucket_remaining
+          # puts big_bucket_remaining
+          @other_bucket = big_bucket_remaining
+          @goal_bucket = @full_bucket
         end
-
-        # puts count
-        # puts small_bucket_remaining
-        # puts big_bucket_remaining
-        @other_bucket = big_bucket_remaining
       end
     else
-      while big_bucket_remaining != @desired_volumen and count < 20 do
+      while big_bucket_remaining != @desired_volumen do
 
         ### Fill Big Bucket
         if big_bucket_remaining == 0 then
@@ -68,19 +85,21 @@ class TwoBucket
         # puts small_bucket_remaining
         # puts big_bucket_remaining
         @other_bucket = small_bucket_remaining
+        @goal_bucket = @full_bucket
       end
     end
     return count
   end
   
   def goal_bucket
-    return @full_bucket
+    return @goal_bucket
   end
   
   def other_bucket
     return @other_bucket
   end
 end
+  
   
 
 puts "1st Exercise"
