@@ -6,7 +6,7 @@ NOT_FIRST_LINE = ["that lay in the house that Jack built.\n", "that ate the malt
 class House
   def self.recite
     poem = []
-    for x in (0..FIRST_LINE.length) do
+    for x in (0..FIRST_LINE.length-1) do
       poem.append(FIRST_LINE[x])
       if x > 0 then
         for y in (0..x-1) do
@@ -18,3 +18,4 @@ class House
   end
 end
 
+puts House.recite
