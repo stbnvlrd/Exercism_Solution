@@ -1,7 +1,8 @@
+class InvalidCodonError < StandardError
+end
+
 class Translation
-  class InvalidCodonError < StandardError
-  end
-  
+    
   def self.of_codon(codon)
     if codon == 'AUG' then
       return 'Methionine'
@@ -19,20 +20,23 @@ class Translation
       return 'Tyrosine'
     elsif codon == 'UGU' or codon == 'UGC' then
       return 'Cysteine'
+    else
+      return 'error'
     end
   end
-
-  def self.of_rna(strand)
-    translated_strand = []
-    number = strand.length / 3
-    for index in (0..number-1) do
-      codon_translated = Translation.of_codon(strand.slice(3*index, 3))
-      if codon_translated == "STOP" then
-        return translated_strand
-      else
-        translated_strand.append(codon_translated)
+  
+    def self.of_rna(strand)
+      translated_strand = []
+      number = strand.length / 3
+      for index in (0..number-1) do
+        codon_translated = Translation.of_codon(strand.slice(3*index, 3))
+        raise InvalidCodonError if codon_translated == 'error'
+        if codon_translated == "STOP" then
+          return translated_strand
+        else
+          translated_strand.append(codon_translated)
+        end
       end
+    return translated_strand
     end
-  return translated_strand
   end
-end
