@@ -21,5 +21,15 @@ module SavingsAccount
   def self.years_before_desired_balance(current_balance, desired_balance)
     raise 'Please implement the SavingsAccount.years_before_desired_balance method'
   end
+
+  def self.years_before_desired_balance(current_balance, desired_balance)
+    yearly_balance = current_balance
+    years = 0
+    while yearly_balance < desired_balance do
+      interest = self.interest_rate(yearly_balance)
+      yearly_balance = yearly_balance*(1+(interest/100))
+      years += 1
+    end
+  return years
+  end
 end
-  
