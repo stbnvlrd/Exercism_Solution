@@ -1,5 +1,10 @@
 class Phrase
     def initialize(phrase)
+      phrase.gsub!(",", " ")
+      phrase.gsub!("'", " ")
+      phrase.gsub!("  ", " ")
+      phrase.gsub!(/[^0-9A-Za-z ]/, '')
+      phrase.gsub!(" t ", "'t ")
       @separeted_phrase = phrase.downcase.split(" ")
     end
   
