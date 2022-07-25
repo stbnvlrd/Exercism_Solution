@@ -4,10 +4,14 @@ class Series
     end
   
     def slices(length)
-    subtrings = []
-    for index in (0..@series.length-length) do
-      subtrings.append(@series[index..index+length-1])
-    end
+      if length <= @series.length then
+        subtrings = []
+        for index in (0..@series.length-length) do
+          subtrings.append(@series[index..index+length-1])
+        end
+      else
+        raise ArgumentError
+      end
     return subtrings
     end
   end
