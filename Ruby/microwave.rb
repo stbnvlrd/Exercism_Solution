@@ -1,35 +1,26 @@
 class Microwave
-    def initialize(time)
-      if (time.to_s[-2..-1]).to_i >= 60 then
-        minutes = (time / 60).to_s
-        seconds = (time % 60).to_s
-      else
-        if time > 99 then
-          minutes = time.to_s[0..-3] 
-        else
-          minutes = "00"
-        end
-        if time < 9 then
-          seconds = "0" + time.to_s
-        else
-          seconds = time.to_s[-2..-1]
-        end
-      end
+  def initialize(time)
+    if time > 9 then
+      seconds = ((time.to_s[-2..-1]).to_i % 60).to_s
+    else
+      seconds = (time % 60).to_s
+    end
+    minutes = ((time.to_s[0..-3]).to_i + ((time.to_s[-2..-1]).to_i / 60)).to_s
     
     @minutes = minutes
     @seconds = seconds
-    end
-  
-    def timer
-      if @minutes.length == 1 then
-        @minutes = "0" + @minutes
-      end
-      if @seconds.length == 1 then
-        @seconds = "0" + @seconds
-      end
-      final_time = @minutes + ":" + @seconds
-    end
   end
+
+  def timer
+    if @minutes.length == 1 then
+      @minutes = "0" + @minutes
+    end
+    if @seconds.length == 1 then
+      @seconds = "0" + @seconds
+    end
+    final_time = @minutes + ":" + @seconds
+  end
+end
       
 
 Microwave.new(1).timer == "00:01" ? (puts "True") : (puts "False" + " " + Microwave.new(1).timer)
