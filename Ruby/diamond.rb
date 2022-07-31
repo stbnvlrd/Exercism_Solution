@@ -19,12 +19,28 @@ class Diamond
         lines.append(text)
         # puts text 
       end
+      indent_length = 0
+      space = 2*length - 3
+      for letter in (@letters[0..length -2].reverse) do
+        if letter == 'A' then
+          indent_length = length - 1
+          text = " "*(length - 1) + letter + " "*(length - 1)
+        else
+          indent_length += 1
+          space -= 2 
+          text = " "*indent_length + letter + " "*space + letter + ''*indent_length
+          
+        end
+        lines.append(text)
+        # puts text 
+      end
+
       return lines.join("\n")
     end
   end
   
   
-  puts Diamond.make_diamond('A')
+  # puts Diamond.make_diamond('A')
   puts Diamond.make_diamond('C')
   puts Diamond.make_diamond('E')
   
