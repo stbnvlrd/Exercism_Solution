@@ -10,5 +10,15 @@ class BoutiqueInventory
       end
       array_names_sorted = array_names.sort
     end
+
+    def cheap
+      array_cheap = Array.new
+      for item in @items do
+        if item[:price] < 30 then
+          array_cheap.append(item)
+        end
+      end
+      array_cheap
+    end
   end
   
