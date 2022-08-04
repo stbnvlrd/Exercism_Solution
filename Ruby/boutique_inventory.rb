@@ -20,5 +20,16 @@ class BoutiqueInventory
       end
       array_cheap
     end
+
+    def out_of_stock
+      array_empty = Array.new
+      for item in @items do
+        if item[:quantity_by_size] == {} then
+          array_empty.append(item)
+        end
+      end
+      return array_empty
+    end
+  
   end
   
