@@ -31,5 +31,14 @@ class BoutiqueInventory
       return array_empty
     end
   
+    def stock_for_item(name)
+      array_not_empty = Hash.new
+      for item in @items do
+        if item[:name] == name then
+          array_not_empty = item[:quantity_by_size]
+        end
+      end
+      return array_not_empty
+    end
   end
   
