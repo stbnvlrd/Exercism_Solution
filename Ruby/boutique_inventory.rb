@@ -40,5 +40,18 @@ class BoutiqueInventory
       end
       return array_not_empty
     end
+
+    def total_stock
+      total = 0
+      for item in @items do
+        for quantity in item[:quantity_by_size] do
+          total +=quantity[1]
+        end
+      end
+      total
+    end
+  
+    private
+    attr_reader :items
   end
   
