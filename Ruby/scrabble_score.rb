@@ -1,5 +1,8 @@
 class Scrabble
     def initialize(word)
+      if word == nil or word == " \t\n" then
+        word = ""
+      end
       @word = word.downcase
     end
   
