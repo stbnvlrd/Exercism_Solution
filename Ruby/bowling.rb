@@ -3,60 +3,39 @@ class Game
   end
 
   def initialize()
-    @final_score = 0
-    @last_roll = 0
-    @roll = 0
-    @last_last_roll = 0
-    @roll_count = 0  
+    @rolls = []
+    @score = 0
+    @strike_count = 0
   end
 
   def roll(pin)
     raise BowlingError if pin < 0
     raise BowlingError if pin > 10
-    
-    @last_last_roll = @last_roll
-    @last_roll = @roll
-    @roll = pin
-    if pin == 10 then
-      @roll_count += 2
-    else
-      @roll_count += 1  
-    end
-
-    # raise BowlingError if (@roll_count % 2 == 0 and (pin + @last_roll) > 10 and @last_roll != 10 and @last_last_roll != 10)
+    @strike_count += 1 if pin == 10
+    # raise BowlingError if @rolls.length > 1 and (@rolls.length + @strike_count)%2  != 0 and (@rolls[-1] + pin) > 10
       
-    print "Turn "
-    puts @roll_count
-    if @roll_count <= 20 then
-      @final_score = @final_score + pin
-      puts @final_score
-    end
-    if (@roll_count % 2 != 0 or (@roll_count % 2 == 0 and pin == 10)) and (@last_last_roll + @last_roll) == 10 and @last_roll != 10 and @last_roll != 0 then
-      @final_score = @final_score + pin
-      print "spare "
-      puts @final_score
-    end
-    if @last_last_roll == 10 then 
-      @final_score = @final_score + pin
-      print "strike 2 "
-      puts @final_score
-    end
-    if @last_roll == 10 and @roll_count < 23 then
-      @final_score = @final_score + pin
-      print "strike 1 "
-      puts @final_score
-    end
+    @rolls.append(pin)
   end
 
-
   def score
-    raise BowlingError if @roll_count == 0
-    @final_score
+    count = 0
+    for index in (0..@rolls.length-1) do
+      count += 1
+      if count <= 20 then
+        @score += @rolls[index] 
+        if  @rolls[index] == 10 then
+          count += 1
+          @score += @rolls[index + 1] 
+          @score += @rolls[index + 2] 
+        elsif count%2 != 0 and count <= 19 and(@rolls[index] + @rolls[index + 1]) == 10 then
+          @score += @rolls[index + 2] 
+        end
+      end
+    end
+    return @score
   end
 end
     
-    
-  
   
   # puts "Game 1"    
   # game = Game.new
